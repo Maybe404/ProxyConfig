@@ -1,1 +1,575 @@
-config
+mixed-port: 7890
+tcp-concurrent: true
+allow-lan: false
+ipv6: false
+mode: rule
+log-level: info
+global-client-fingerprint: chrome
+find-process-mode: strict
+geodata-mode: true
+geox-url:
+  #geoip: >-
+    #https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat
+  #geosite: >-
+    #https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
+  mmdb: >-
+    https://raw.githubusercontent.com/NobyDa/geoip/release/Private-GeoIP-CN.mmdb
+unified-delay: true
+profile:
+  store-selected: true
+  store-fake-ip: true
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  sniff:
+    TLS:
+      ports:
+        - 443
+        - 8443
+    HTTP:
+      ports:
+        - 80
+        - 8080-8880
+      override-destination: true
+    QUIC:
+      ports:
+        - 443
+        - 8443
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+    - 'any:53'
+  auto-route: true
+  auto-detect-interface: true
+dns:
+  enable: true
+  prefer-h3: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  listen: ':1053'
+  fake-ip-range: 28.0.0.1/8 
+  fake-ip-filter:
+    - '*'
+    - +.lan
+    - +.local
+    - +.direct
+    - +.msftconnecttest.com
+    - +.msftncsi.com
+    - 114.116.205.9
+    - 124.251.34.110
+    - +.iccec.com.cn
+    - +.iccec.cn
+    - +.market.xiaomi.com
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://kun0y6.host.apad.pro/dns-query
+pg:
+  type: select
+p:
+  type: http
+  interval: 3600
+  health-check:
+    enable: true
+    url: 'http://latency-test.skk.moe/endpoint'
+    interval: 6
+url-test:
+  type: url-test
+  url: 'http://latency-test.skk.moe/endpoint'
+  interval: 6
+  tolerance: 20
+  timeout: 1000
+  max-failed-times: 3
+  include-all: true
+select:
+  type: select
+  url: 'http://latency-test.skk.moe/endpoint'
+  timeout: 1000
+  include-all: true
+c:
+  type: http
+  behavior: classical
+  format: text
+  interval: 3600
+d:
+  type: http
+  behavior: domain
+  format: text
+  interval: 3600
+i:
+  type: http
+  behavior: ipcidr
+  format: text
+  interval: 3600
+proxy-groups:
+  - name: Proxy
+    type: select
+    proxies:
+      - 手动选择
+      - 链式代理
+      - 自动选择
+      - 香港
+      - 新加坡
+      - 日本
+      - 美国
+      - 德国
+    icon: >-
+      https://github.com/clash-verge-rev/clash-verge-rev/raw/main/src-tauri/icons/icon.png
+  - name: 手动选择
+    type: select
+    include-all: true
+    filter: ^(?!.*Landing).*
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Magic.png
+  - name: 中转机
+    type: select
+    include-all: true
+    filter: ^(?!.*Landing).*
+    icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/Vpn.png'
+  - name: 落地机
+    type: select
+    include-all: true
+    filter: Landing
+    icon: >-
+      https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Domestic.png
+  - name: AIGC
+    type: select
+    proxies:
+      - Proxy
+      - 手动选择
+      - 落地机
+      - 自动选择
+      - 香港
+      - 新加坡
+      - 日本
+      - 美国
+      - 德国
+    icon: 'https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png'
+  - name: AppleCDN
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+      - 手动选择
+      - 落地机
+      - 自动选择
+      - 香港
+      - 新加坡
+      - 日本
+      - 美国
+      - 德国
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png
+  - name: Telegram
+    type: select
+    proxies:
+      - Proxy
+      - 手动选择
+      - 落地机
+      - 自动选择
+      - 香港
+      - 新加坡
+      - 日本
+      - 美国
+      - 德国
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+  - name: Google
+    type: select
+    proxies:
+      - Proxy
+      - 手动选择
+      - 落地机
+      - 自动选择
+      - 香港
+      - 新加坡
+      - 日本
+      - 美国
+      - 德国
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+  - name: Microsoft
+    type: select
+    proxies:
+      - Proxy
+      - DIRECT
+      - 手动选择
+      - 落地机
+      - 自动选择
+      - 香港
+      - 新加坡
+      - 日本
+      - 美国
+      - 德国
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_2.png
+  - name: Download
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+      - 手动选择
+      - 落地机
+      - 自动选择
+      - 香港
+      - 新加坡
+      - 日本
+      - 美国
+      - 德国
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Download.png
+  - name: 自动选择
+    type: url-test
+    include-all: true
+    filter: ^(?!.*Landing).*
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png
+  - name: 链式代理
+    type: relay
+    proxies:
+      - 中转机
+      - 落地机
+    icon: >-
+      https://git.imee.me/https://github.com/Koolson/Qure/raw/master/IconSet/Color/TIDAL_1.png
+  - name: 香港
+    type: url-test
+    url: 'http://latency-test.skk.moe/endpoint'
+    interval: 6
+    tolerance: 20
+    timeout: 1000
+    max-failed-times: 3
+    include-all: true
+    filter: "(?i)^(?!.*Landing).*?(\U0001F1ED\U0001F1F0|香港|\b(HK|Hong)\b)"
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+  - name: 日本
+    type: url-test
+    url: 'http://latency-test.skk.moe/endpoint'
+    interval: 6
+    tolerance: 20
+    timeout: 1000
+    max-failed-times: 3
+    include-all: true
+    filter: "(?i)^(?!.*Landing).*?(\U0001F1EF\U0001F1F5|日本|东京|\b(JP|Japan)\b)"
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+  - name: 新加坡
+    type: url-test
+    url: 'http://latency-test.skk.moe/endpoint'
+    interval: 6
+    tolerance: 20
+    timeout: 1000
+    max-failed-times: 3
+    include-all: true
+    filter: "(?i)^(?!.*Landing).*?(\U0001F1F8\U0001F1EC|新加坡|狮|\b(SG|Singapore)\b)"
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+  - name: 美国
+    type: select
+    url: 'http://latency-test.skk.moe/endpoint'
+    timeout: 1000
+    include-all: true
+    filter: "(?i)^(?!.*Landing).*?(\U0001F1FA\U0001F1F8|美国|洛杉矶|圣何塞|\b(US|United States)\b)"
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+  - name: 德国
+    type: url-test
+    url: 'http://latency-test.skk.moe/endpoint'
+    interval: 6
+    tolerance: 20
+    timeout: 1000
+    max-failed-times: 3
+    include-all: true
+    filter: "(?i)^(?!.*Landing).*?(Germany|DE|德国|\b(Germany)\b)"
+    icon: >-
+      https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Germany.png
+rule-providers:
+  MyDirect:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/MyDirect.list
+    url: >-
+      https://raw.githubusercontent.com/Maybe404/Rules/refs/heads/main/Surge/MyDirect.list
+  MyProxy:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/MyProxy.list
+    url: >-
+      https://raw.githubusercontent.com/Maybe404/Rules/refs/heads/main/Surge/MyProxy.list
+  ai2:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/ai2.list
+    url: 'https://raw.githubusercontent.com/sooyaaabo/Loon/main/Rule/AI.list'
+  AD:
+    type: http
+    behavior: domain
+    format: text
+    interval: 3600
+    path: ./rule-providers/AD.list
+    url: 'https://adrules.top/adrules_domainset.txt'
+  PCDN:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/PCDN.list
+    url: 'https://raw.githubusercontent.com/sooyaaabo/Loon/main/Rule/PCDN.list'
+  speedtest:
+    type: http
+    behavior: domain
+    format: text
+    interval: 3600
+    path: ./rule-providers/speedtest.txt
+    url: 'https://ruleset.skk.moe/Clash/domainset/speedtest.txt'
+  cdn-domain:
+    type: http
+    behavior: domain
+    format: text
+    interval: 3600
+    path: ./rule-providers/cdn-domain.txt
+    url: 'https://ruleset.skk.moe/Clash/domainset/cdn.txt'
+  cdn-rule:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/cdn.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/cdn.txt'
+  stream:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/stream.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/stream.txt'
+  ai:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/ai.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/ai.txt'
+  Google:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/Google.list
+    url: >-
+      https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.list
+  YouTube:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/YouTube.list
+    url: >-
+      https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.list
+  telegram:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/telegram.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/telegram.txt'
+  apple-cdn:
+    type: http
+    behavior: domain
+    format: text
+    interval: 3600
+    path: ./rule-providers/apple_cdn.txt
+    url: 'https://ruleset.skk.moe/Clash/domainset/apple_cdn.txt'
+  apple-cn:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/apple_cn.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/apple_cn.txt'
+  apple-services:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/apple_services.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/apple_services.txt'
+  ms-cdn:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/microsoft_cdn.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/microsoft_cdn.txt'
+  ms-services:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/microsoft.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/microsoft.txt'
+  emby-direct:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/Emby-Direct
+    url: >-
+      https://raw.githubusercontent.com/Maybe404/Rules/refs/heads/main/Surge/Emby-Direct.list
+  emby-proxy:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/Emby-Proxy
+    url: >-
+      https://raw.githubusercontent.com/Maybe404/Rules/refs/heads/main/Surge/Emby-Proxy.list
+  netease:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/neteasemusic.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/neteasemusic.txt'
+  download-domain:
+    type: http
+    behavior: domain
+    format: text
+    interval: 3600
+    path: ./rule-providers/download.txt
+    url: 'https://ruleset.skk.moe/Clash/domainset/download.txt'
+  download:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/download.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/download.txt'
+  lan-domain:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/lan.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/lan.txt'
+  domestic:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/domestic.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/domestic.txt'
+  direct:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/direct.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/direct.txt'
+  global:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/global.txt
+    url: 'https://ruleset.skk.moe/Clash/non_ip/global.txt'
+  ip-lan:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/lan-ip.txt
+    url: 'https://ruleset.skk.moe/Clash/ip/lan.txt'
+  ip-reject:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/reject.txt
+    url: 'https://ruleset.skk.moe/Clash/ip/reject.txt'
+  ip-stream:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/stream-ip.txt
+    url: 'https://ruleset.skk.moe/Clash/ip/stream.txt'
+  ip-telegram:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/telegram-ip.txt
+    url: 'https://ruleset.skk.moe/Clash/ip/telegram.txt'
+  ip-telegram-asn:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/telegram_asn.txt
+    url: 'https://ruleset.skk.moe/Clash/ip/telegram_asn.txt'
+  ip-netease:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/neteasemusic-ip.txt
+    url: 'https://ruleset.skk.moe/Clash/ip/neteasemusic.txt'
+  ip-domestic:
+    type: http
+    behavior: classical
+    format: text
+    interval: 3600
+    path: ./rule-providers/domestic-ip.txt
+    url: 'https://ruleset.skk.moe/Clash/ip/domestic.txt'
+  ip-china:
+    type: http
+    behavior: ipcidr
+    format: text
+    interval: 3600
+    path: ./rule-providers/china_ip.txt
+    url: 'https://ruleset.skk.moe/Clash/ip/china_ip.txt'
+rules:
+  - 'RULE-SET,MyDirect,DIRECT'
+  - 'RULE-SET,MyProxy,Proxy'
+  #- 'RULE-SET,AD,REJECT'
+  - 'RULE-SET,PCDN,REJECT'
+  - 'RULE-SET,Google,Google'
+  - 'RULE-SET,YouTube,Google'
+  - 'RULE-SET,ai,AIGC'
+  - 'RULE-SET,ai2,AIGC' 
+  - 'RULE-SET,speedtest,Proxy'
+  - 'RULE-SET,cdn-domain,Proxy'
+  - 'RULE-SET,cdn-rule,Proxy'
+  - 'RULE-SET,stream,Proxy'
+  - 'RULE-SET,telegram,Telegram'
+  - 'RULE-SET,apple-cdn,AppleCDN'
+  - 'RULE-SET,apple-cn,DIRECT'
+  - 'RULE-SET,apple-services,AppleCDN'
+  - 'RULE-SET,ms-cdn,Microsoft'
+  - 'RULE-SET,ms-services,Microsoft'
+  - 'RULE-SET,emby-direct,DIRECT'
+  - 'RULE-SET,emby-proxy,Proxy'
+  #- 'RULE-SET,netease,DIRECT'
+  - 'RULE-SET,download-domain,Download'
+  - 'RULE-SET,download,Download'
+  - 'RULE-SET,lan-domain,DIRECT'
+  - 'RULE-SET,domestic,DIRECT'
+  - 'RULE-SET,direct,DIRECT'
+  - 'RULE-SET,global,Proxy'
+  - 'RULE-SET,ip-lan,DIRECT'
+  - 'RULE-SET,ip-reject,REJECT-DROP'
+  - 'RULE-SET,ip-stream,Proxy'
+  - 'RULE-SET,ip-telegram,Proxy'
+  - 'RULE-SET,ip-telegram-asn,Proxy'
+  #- 'RULE-SET,ip-netease,DIRECT'
+  - 'GEOIP,CN,DIRECT'
+  - 'MATCH,Proxy'
