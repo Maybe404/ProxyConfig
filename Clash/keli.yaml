@@ -290,6 +290,11 @@ rule-providers:
     path: './rules/ESET_China.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/ESET_China.yaml'
 
+  Gemini:
+    <<: *RuleProviders
+    path: './rules/Gemini.yaml'
+    url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Gemini/Gemini.yaml'
+
 # 规则指向
 rules:
   - RULE-SET, LAN, DIRECT
@@ -298,6 +303,7 @@ rules:
   - RULE-SET, ChinaDownloadCDN, DIRECT
   - RULE-SET, InternationalDownloadCDN, 境外下载
   - RULE-SET, AI, AI
+  - RULE-SET, Gemini, AI
   - RULE-SET, TikTok, TikTok
   - RULE-SET, Steam, 兜底后备策略
   - RULE-SET, Game, 游戏选择
