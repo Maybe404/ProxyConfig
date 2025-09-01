@@ -299,6 +299,7 @@ rule-providers:
 rules:
   - RULE-SET, LAN, DIRECT
   - RULE-SET, Direct, DIRECT
+  - DOMAIN-SUFFIX, cn, DIRECT
   - RULE-SET, Proxy, 兜底后备策略
   - RULE-SET, ChinaDownloadCDN, DIRECT
   - RULE-SET, InternationalDownloadCDN, 境外下载
