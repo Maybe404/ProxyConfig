@@ -117,6 +117,8 @@ LoadBalance: &LoadBalance {type: load-balance, interval: 6, lazy: true, url: 'ht
 # 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用直连策略]
 RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml, proxy: DIRECT}
 
+RuleProvidersText: &RuleProvidersText {type: http, behavior: classical, interval: 3600, format: text, proxy: DIRECT}
+
 # 策略组
 proxy-groups: 
   - {name: 游戏选择, type: select, include-all-providers: true, filter: *FilterGame, proxies: [DIRECT, 全球选择]}
@@ -295,10 +297,22 @@ rule-providers:
     path: './rules/Gemini.yaml'
     url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Gemini/Gemini.yaml'
 
+  Domestic:
+    <<: *RuleProvidersText
+    path: './rules/Domestic.txt'
+    url: 'https://ruleset.skk.moe/Clash/non_ip/domestic.txt'
+
+  Direct-Set:
+    <<: *RuleProvidersText
+    path: './rules/Direct-Set.txt'
+    url: 'https://ruleset.skk.moe/Clash/non_ip/direct.txt'
+
 # 规则指向
 rules:
   - RULE-SET, LAN, DIRECT
   - RULE-SET, Direct, DIRECT
+  - RULE-SET, Domestic, DIRECT
+  - RULE-SET, Direct-Set, DIRECT
   - DOMAIN-SUFFIX, cn, DIRECT
   - RULE-SET, Proxy, 兜底后备策略
   - RULE-SET, ChinaDownloadCDN, DIRECT
