@@ -132,7 +132,7 @@ tun:
 proxy-providers:
   主力订阅:
     type: http
-    url: https://请替换为自己的订阅链接
+    url: https://sub.868677.xyz/YvJx5UaHrzqFnEp3LKMC/download/collection/Self?target=ClashMeta
     path: ./providers/main.yaml
     interval: 86400
     health-check:
