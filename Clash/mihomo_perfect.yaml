@@ -76,4 +76,4 @@ rules:
   - RULE-SET,gfw2,Proxy
   - RULE-SET,Lan,DIRECT
   - GEOIP,CN,DIRECT
-  - MATCH,兜底分流
+  - MATCH,Proxy
