@@ -1,0 +1,58 @@
+[Rule]
+RULE-SET,https://github.com/Blankwonder/surge-list/raw/master/cn.list,DIRECT
+
+DOMAIN,apps.apple.com,Proxy
+DOMAIN-SUFFIX,ls.apple.com,DIRECT // Apple Maps
+DOMAIN-SUFFIX,store.apple.com,DIRECT // Apple Store Online
+
+RULE-SET,https://github.com/Blankwonder/surge-list/raw/master/apple.list,Proxy
+
+# DOMAIN,api.liquidlink.cn,REJECT // Added for: api.liquidlink.cn:443
+# DOMAIN,ddns.868677.xyz,北移
+# Non IP
+
+# 自定义规则
+DOMAIN-SUFFIX,myhome,DEVICE:MACMINI,extended-matching
+DOMAIN,ip.p3terx.com,DIRECT,extended-matching
+
+# AIGC
+RULE-SET,https://ruleset.skk.moe/List/non_ip/ai.conf,AIGC,extended-matching,no-resolve
+RULE-SET,"https://beta.868677.xyz/file/_start_/https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/rule/AI.list/_end_/AI.list?type=rule-set&target=surge-rule-set&del=true&jqEnabled=true",AIGC,extended-matching,no-resolve
+
+# 系统请求
+RULE-SET,SYSTEM,Proxy
+
+# Speedtest 测速域名
+# DOMAIN-SET,https://ruleset.skk.moe/List/domainset/speedtest.conf,Proxy,extended-matching
+RULE-SET,"https://beta.868677.xyz/file/_start_/https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr/_end_/SpeedtestInternational.list.txt?type=rule-set&target=surge-rule-set&del=true&jqEnabled=true",Proxy,extended-matching,no-resolve
+
+# 微信
+# RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/WeChat/WeChat.list,DIRECT,extended-matching,no-resolve // 微信
+
+# 常见海外域名
+# RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Telegram/Telegram.list,Proxy,extended-matching,no-resolve
+RULE-SET,https://github.com/Blankwonder/surge-list/raw/master/blocked.list,Proxy
+
+RULE-SET,https://ruleset.skk.moe/List/non_ip/global.conf,Proxy,extended-matching,no-resolve
+
+
+# RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Global/Global_All_No_Resolve.list,Proxy,extended-matching,no-resolve
+
+# IP
+# 内网IP
+RULE-SET,LAN,DIRECT
+
+# 国内IP
+RULE-SET,https://ruleset.skk.moe/List/ip/domestic.conf,DIRECT
+
+RULE-SET,https://ruleset.skk.moe/List/ip/china_ip.conf,DIRECT
+
+RULE-SET,https://ruleset.skk.moe/List/ip/china_ip_ipv6.conf,DIRECT
+
+# GEOIP,HK,Forward-HK
+# GEOIP,JP,Forward-JP
+# GEOIP,SG,Forward-SG
+# GEOIP,CN,DIRECT
+# GEOIP,US,Forward-Los
+
+FINAL,Proxy,dns-failed
