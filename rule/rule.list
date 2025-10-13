@@ -16,8 +16,8 @@ DOMAIN-SUFFIX,myhome,DEVICE:MACMINI,extended-matching
 DOMAIN,ip.p3terx.com,DIRECT,extended-matching
 
 # AIGC
-RULE-SET,https://ruleset.skk.moe/List/non_ip/ai.conf,AIGC,extended-matching,no-resolve
-RULE-SET,"https://beta.868677.xyz/file/_start_/https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/rule/AI.list/_end_/AI.list?type=rule-set&target=surge-rule-set&del=true&jqEnabled=true",AIGC,extended-matching,no-resolve
+RULE-SET,https://ruleset.skk.moe/List/non_ip/ai.conf
+RULE-SET,https://beta.868677.xyz/file/_start_/https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/rule/AI.list/_end_/AI.list?type=rule-set&target=surge-rule-set&del=true&jqEnabled=true
 
 # 系统请求
 RULE-SET,SYSTEM,Proxy
@@ -56,3 +56,4 @@ RULE-SET,https://ruleset.skk.moe/List/ip/china_ip_ipv6.conf,DIRECT
 # GEOIP,US,Forward-Los
 
 FINAL,Proxy,dns-failed
+
