@@ -144,7 +144,6 @@ proxy-groups:
   - {name: Netflix, type: select, proxies: [香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]}
   - {name: Emby, type: select, proxies: [DIRECT, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]}
   - {name: 兜底后备策略, type: fallback, proxies: [香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]}
-
 # 自动策略
   - {name: 香港自动策略, <<: *UrlTest, filter: *FilterHK}
   - {name: 台湾自动策略, <<: *UrlTest, filter: *FilterTW}
