@@ -146,15 +146,15 @@ proxy-groups:
   - {name: 兜底后备策略, type: fallback, proxies: [香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]}
 
 # 自动策略
-  - {name: ⏱香港自动策略, <<: *UrlTest, filter: *FilterHK}
-  - {name: ⏱台湾自动策略, <<: *UrlTest, filter: *FilterTW}
-  - {name: ⏱日本自动策略, <<: *UrlTest, filter: *FilterJP}
-  - {name: ⏱韩国自动策略, <<: *UrlTest, filter: *FilterKR}
-  - {name: ⏱新国自动策略, <<: *UrlTest, filter: *FilterSG}
-  - {name: ⏱美国自动策略, <<: *UrlTest, filter: *FilterUS}
-  - {name: ⏱英国自动策略, <<: *UrlTest, filter: *FilterUK}
-  - {name: ⏱法国自动策略, <<: *UrlTest, filter: *FilterFR}
-  - {name: ⏱德国自动策略, <<: *UrlTest, filter: *FilterDE}
+  - {name: 香港自动策略, <<: *UrlTest, filter: *FilterHK}
+  - {name: 台湾自动策略, <<: *UrlTest, filter: *FilterTW}
+  - {name: 日本自动策略, <<: *UrlTest, filter: *FilterJP}
+  - {name: 韩国自动策略, <<: *UrlTest, filter: *FilterKR}
+  - {name: 新国自动策略, <<: *UrlTest, filter: *FilterSG}
+  - {name: 美国自动策略, <<: *UrlTest, filter: *FilterUS}
+  - {name: 英国自动策略, <<: *UrlTest, filter: *FilterUK}
+  - {name: 法国自动策略, <<: *UrlTest, filter: *FilterFR}
+  - {name: 德国自动策略, <<: *UrlTest, filter: *FilterDE}
 
 # 订阅规则
 rule-providers:
