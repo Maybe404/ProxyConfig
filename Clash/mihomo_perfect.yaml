@@ -221,7 +221,7 @@ rule-providers:
 rules:
   - RULE-SET,ai_non_ip,AI
   - RULE-SET,ai,AI
-  - RULE-SER,GameDownload,GameDownload
+  - RULE-SET,GameDownload,GameDownload
   - RULE-SET,cdn_domainset,Proxy
   - RULE-SET,cdn_non_ip,Proxy
   - RULE-SET,stream_non_ip,Stream
