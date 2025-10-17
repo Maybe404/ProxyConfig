@@ -33,7 +33,7 @@ dns:
 
 # 锚点参数
 pg: &pg {type: select, proxies: [Proxy, 香港节点, 美国节点, 狮城节点, 日本节点, 台湾节点, DIRECT]}
-url-test: &url-test {type: url-test, url: http://1.1.1.1/generate_204, interval: 60, tolerance: 0, include-all: true}
+url-test: &url-test {type: url-test, url: http://1.1.1.1/generate_204, interval: 30, tolerance: 20, include-all: true}
 select: &select {type: select, include-all: true}
 fallback: &fallback {type: fallback, url: http://1.1.1.1/generate_204, interval: 300, include-all: true}
 load-balance: &load-balance {type: load-balance, strategy: consistent-hashing, url: http://1.1.1.1/generate_204, interval: 300, include-all: true}
@@ -41,39 +41,205 @@ c: &c {type: http, behavior: classical, format: text, interval: 86400}
 
 proxy-groups:
 
-  - {name: Proxy, type: select, include-all: true, proxies: [香港节点, 美国节点, 狮城节点, 日本节点, 台湾节点, DIRECT], icon: https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/applesafari.png}
-  - {name: AI, <<: *pg, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png}
-  - {name: 游戏平台, <<: *pg, icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png}
-  - {name: 香港节点, <<: *url-test, filter: "(?i)🇭🇰|香港|(\b(HK|Hong)\b)", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png}
-  - {name: 美国节点, <<: *url-test, filter: "(?i)🇺🇸|美国|洛杉矶|圣何塞|(\b(US|United States)\b)", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png}
-  - {name: 狮城节点, <<: *url-test, filter: "(?i)🇸🇬|新加坡|狮|(\b(SG|Singapore)\b)", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png}
-  - {name: 日本节点, <<: *url-test, filter: "(?i)🇯🇵|日本|东京|(\b(JP|Japan)\b)", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png}
-  - {name: 台湾节点, <<: *url-test, filter: "(?i)🇨🇳|🇹🇼|台湾|(\b(TW|Tai|Taiwan)\b)", icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png}
+  - {name: Proxy, type: select, include-all: true, proxies: [香港节点, 美国节点, 狮城节点, 日本节点, 台湾节点, DIRECT], icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Proxy.png}
+  - {name: AI, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/ChatGPT.png}
+  - {name: Telegram, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Telegram_03.png}
+  - {name: Stream, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/CMedia.png}
+  - {name: MicrosoftCDN, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Microsoft_03.png}
+  - {name: Microsoft, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Microsoft_05.png}
+  - {name: GameDownload, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Game.png}
+  - {name: AppleCDN, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_03.png}
+  - {name: Apple, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_01.png}
+  - {name: 香港节点, <<: *url-test, filter: "(?i)🇭🇰|香港|(\b(HK|Hong)\b)", icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/HK_02.png}
+  - {name: 美国节点, <<: *url-test, filter: "(?i)🇺🇸|美国|洛杉矶|圣何塞|(\b(US|United States)\b)", icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/US.png}
+  - {name: 狮城节点, <<: *url-test, filter: "(?i)🇸🇬|新加坡|狮|(\b(SG|Singapore)\b)", icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/SG.png}
+  - {name: 日本节点, <<: *url-test, filter: "(?i)🇯🇵|日本|东京|(\b(JP|Japan)\b)", icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/JP_01.png}
+  - {name: 台湾节点, <<: *url-test, filter: "(?i)🇨🇳|🇹🇼|台湾|(\b(TW|Tai|Taiwan)\b)", icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/TW_02.png, hidden: true}
 
 rule-providers:
-  
-  cn: {<<: *c, url: https://github.com/Blankwonder/surge-list/raw/master/cn.list}
-  Lan: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Lan.list}
-  AppleProxy: {<<: *c, url: https://github.com/Blankwonder/surge-list/raw/master/apple.list}
-  AI: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/AI.list}
-  AI2: {<<: *c, url: https://beta.868677.xyz/file/_start_/https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/rule/AI.list/_end_/AI.list?type=rule-set&target=surge-rule-set&del=true&jqEnabled=true}
-  Steam: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Steam.list}
-  Epic: {<<: *c, url: https://github.com/Repcz/Tool/raw/X/mihomo/Rules/Epic.list}
-  speedtest: {<<: *c, url: https://beta.868677.xyz/file/_start_/https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr/_end_/SpeedtestInternational.list.txt?type=rule-set&target=surge-rule-set&del=true&jqEnabled=true}
-  gfw: {<<: *c, url: https://github.com/Blankwonder/surge-list/raw/master/blocked.list}
-  gfw2: {<<: *c, url: https://ruleset.skk.moe/List/non_ip/global.conf}
-
-
+  cdn_domainset:
+    type: http
+    behavior: domain
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/domainset/cdn.txt
+    path: ./sukkaw_ruleset/cdn_domainset.txt
+  cdn_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/cdn.txt
+    path: ./sukkaw_ruleset/cdn_non_ip.txt
+  stream_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/stream.txt
+    path: ./sukkaw_ruleset/stream_non_ip.txt
+  stream_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/ip/stream.txt
+    path: ./sukkaw_ruleset/stream_ip.txt
+  ai_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/ai.txt
+    path: ./sukkaw_ruleset/ai_non_ip.txt
+  ai:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://beta.868677.xyz/file/_start_/https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/rule/AI.list/_end_/AI.list?type=rule-set&target=surge-rule-set&del=true&jqEnabled=true
+    path: ./sukkaw_ruleset/ai.txt
+  telegram_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/telegram.txt
+    path: ./sukkaw_ruleset/telegram_non_ip.txt
+  telegram_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/ip/telegram.txt
+    path: ./sukkaw_ruleset/telegram_ip.txt
+  apple_cdn:
+    type: http
+    behavior: domain
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/domainset/apple_cdn.txt
+    path: ./sukkaw_ruleset/apple_cdn.txt
+  apple_services:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/apple_services.txt
+    path: ./sukkaw_ruleset/apple_services.txt
+  apple_cn_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/apple_cn.txt
+    path: ./sukkaw_ruleset/apple_cn_non_ip.txt
+  microsoft_cdn_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/microsoft_cdn.txt
+    path: ./sukkaw_ruleset/microsoft_cdn_non_ip.txt
+  microsoft_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/microsoft.txt
+    path: ./sukkaw_ruleset/microsoft_non_ip.txt
+  download_domainset:
+    type: http
+    behavior: domain
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/domainset/download.txt
+    path: ./sukkaw_ruleset/download_domainset.txt
+  download_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/download.txt
+    path: ./sukkaw_ruleset/download_non_ip.txt
+  GameDownload:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Game/GameDownload/GameDownload.list
+    path: ./sukkaw_ruleset/GameDownload.txt
+  lan_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/lan.txt
+    path: ./sukkaw_ruleset/lan_non_ip.txt
+  lan_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/ip/lan.txt
+    path: ./sukkaw_ruleset/lan_ip.txt
+  domestic_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/domestic.txt
+    path: ./sukkaw_ruleset/domestic_non_ip.txt
+  direct_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/direct.txt
+    path: ./sukkaw_ruleset/direct_non_ip.txt
+  global_non_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/non_ip/global.txt
+    path: ./sukkaw_ruleset/global_non_ip.txt
+  china_ip:
+    type: http
+    behavior: ipcidr
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/ip/china_ip.txt
+    path: ./sukkaw_ruleset/china_ip.txt
+  domestic_ip:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/Clash/ip/domestic.txt
+    path: ./sukkaw_ruleset/domestic_ip.txt
 rules:
-  - RULE-SET,cn,DIRECT
-  - RULE-SET,AI,AI
-  - RULE-SET,AI2,AI
-  - RULE-SET,AppleProxy,Proxy
-  - RULE-SET,Steam,游戏平台
-  - RULE-SET,Epic,游戏平台
-  - RULE-SET,speedtest,Proxy
-  - RULE-SET,gfw,Proxy
-  - RULE-SET,gfw2,Proxy
-  - RULE-SET,Lan,DIRECT
-  - GEOIP,CN,DIRECT
+  - RULE-SET,ai_non_ip,AI
+  - RULE-SET,ai,AI
+  - RULE-SER,GameDownload,GameDownload
+  - RULE-SET,cdn_domainset,Proxy
+  - RULE-SET,cdn_non_ip,Proxy
+  - RULE-SET,stream_non_ip,Stream
+  - RULE-SET,telegram_non_ip,Telegram
+  - RULE-SET,apple_cdn,AppleCDN
+  - RULE-SET,microsoft_cdn_non_ip,MicrosoftCDN
+  - RULE-SET,download_domainset,Download
+  - RULE-SET,download_non_ip,Download
+  - RULE-SET,apple_cn_non_ip,DIRECT
+  - RULE-SET,apple_services,Apple
+  - RULE-SET,microsoft_non_ip,Microsoft
+  - RULE-SET,global_non_ip,Proxy
+  - RULE-SET,domestic_non_ip,DIRECT
+  - RULE-SET,direct_non_ip,DIRECT
+  - RULE-SET,lan_non_ip,DIRECT
+  - RULE-SET,telegram_ip,Telegram
+  - RULE-SET,stream_ip,Stream
+  - RULE-SET,domestic_ip,DIRECT
+  - RULE-SET,lan_ip,DIRECT
+  - RULE-SET,china_ip,DIRECT
   - MATCH,Proxy
