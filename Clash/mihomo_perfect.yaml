@@ -47,6 +47,7 @@ proxy-groups:
   - {name: Stream, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/CMedia.png}
   - {name: MicrosoftCDN, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Microsoft_03.png}
   - {name: Microsoft, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Microsoft_05.png}
+  - {name: Download, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Download.png}
   - {name: GameDownload, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Game.png}
   - {name: AppleCDN, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_03.png}
   - {name: Apple, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_01.png}
