@@ -41,7 +41,7 @@ c: &c {type: http, behavior: classical, format: text, interval: 86400}
 
 proxy-groups:
 
-  - {name: Proxy, type: select, include-all: true, proxies: [香港节点, 美国节点, 狮城节点, 日本节点, 香港节点自动, 美国节点自动, 狮城节点自动, 日本节点自动], icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Proxy.png}
+  - {name: Proxy, type: select,proxies: [香港节点, 美国节点, 狮城节点, 日本节点, 香港节点自动, 美国节点自动, 狮城节点自动, 日本节点自动], icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Proxy.png}
   - {name: AI, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/ChatGPT.png}
   - {name: Telegram, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Telegram_03.png}
   - {name: Stream, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/CMedia.png}
