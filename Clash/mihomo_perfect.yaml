@@ -118,6 +118,13 @@ rule-providers:
     interval: 43200
     url: https://ruleset.skk.moe/Clash/ip/telegram.txt
     path: ./sukkaw_ruleset/telegram_ip.txt
+  wechat:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/WeChat/WeChat.list
+    path: ./sukkaw_ruleset/wechat.txt
   apple_cdn:
     type: http
     behavior: domain
@@ -227,6 +234,7 @@ rules:
   - RULE-SET,ai_non_ip,AI
   - RULE-SET,ai,AI
   - RULE-SET,GameDownload,GameDownload
+  - RULE-SET,wechat,DIRECT
   - RULE-SET,cdn_domainset,Proxy
   - RULE-SET,cdn_non_ip,Proxy
   - RULE-SET,stream_non_ip,Stream
