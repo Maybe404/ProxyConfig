@@ -48,7 +48,7 @@ proxy-groups:
   - {name: MicrosoftCDN, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Microsoft_03.png}
   - {name: Microsoft, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Microsoft_05.png}
   - {name: Download, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Download.png}
-  - {name: GameDownload, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Game.png}
+  - {name: Game, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Game.png}
   - {name: AppleCDN, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_03.png}
   - {name: Apple, <<: *pg, icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_01.png}
   - {name: 香港节点自动, <<: *url-test, filter: "(?i)🇭🇰|香港|(\b(HK|Hong)\b)", icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/HK_02.png}
@@ -174,13 +174,20 @@ rule-providers:
     interval: 43200
     url: https://ruleset.skk.moe/Clash/non_ip/download.txt
     path: ./sukkaw_ruleset/download_non_ip.txt
-  GameDownload:
+  GameDownloadCN:
     type: http
     behavior: classical
     format: text
     interval: 43200
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Game/GameDownload/GameDownload.list
-    path: ./sukkaw_ruleset/GameDownload.txt
+    url: https://beta.868677.xyz/file/_start_/https://kelee.one/Tool/Clash/Rule/ChinaDownloadCDN.yaml/_end_/ChinaDownloadCDN.list.txt?type=rule-set&target=surge-rule-set&del=true&jqEnabled=true
+    path: ./sukkaw_ruleset/GameDownloadCN.txt
+  Game:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Surge/Game/Game.list
+    path: ./sukkaw_ruleset/Game.txt
   lan_non_ip:
     type: http
     behavior: classical
@@ -233,7 +240,8 @@ rule-providers:
 rules:
   - RULE-SET,ai_non_ip,AI
   - RULE-SET,ai,AI
-  - RULE-SET,GameDownload,GameDownload
+  - RULE-SET,GameDownloadCN,Game
+  - RULE-SET,Game,Game
   # - RULE-SET,wechat,DIRECT
   - RULE-SET,cdn_domainset,Proxy
   - RULE-SET,cdn_non_ip,Proxy
