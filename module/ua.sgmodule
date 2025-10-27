@@ -1,0 +1,10 @@
+#!name=Kelee.one UA Modifier
+#!desc=访问 kelee.one 时将 User-Agent 修改为 Loon，解决浏览器访问被屏蔽的问题
+#!system=ios
+
+[Header Rewrite]
+# 修改访问 kelee.one 的 User-Agent
+^https?:\/\/kelee\.one header-replace User-Agent "Loon/3.2.1 (iPhone; iOS 17.0; Scale/3.00)"
+
+[MITM]
+hostname = %APPEND% kelee.one
