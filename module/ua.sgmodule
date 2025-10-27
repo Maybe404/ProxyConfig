@@ -4,7 +4,7 @@
 
 [Header Rewrite]
 # 修改访问 kelee.one 的 User-Agent
-^https?:\/\/kelee\.one header-replace User-Agent "Loon/3.2.1 (iPhone; iOS 17.0; Scale/3.00)"
+^https?:\/\/kelee\.one header-replace User-Agent "Loon/3.3.5 (iPhone; iOS 26.0; Scale/3.00)"
 
 [MITM]
 hostname = %APPEND% kelee.one
