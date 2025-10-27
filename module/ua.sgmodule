@@ -3,8 +3,17 @@
 #!system=ios
 
 [Header Rewrite]
-# 修改访问 kelee.one 的 User-Agent
-^https?:\/\/kelee\.one header-replace User-Agent "Loon/3.3.5 (iPhone; iOS 26.0; Scale/3.00)"
+# 修改访问 kelee.one 的 User-Agent（请求头）
+http-request ^https?:\/\/kelee\.one header-del User-Agent
+http-request ^https?:\/\/kelee\.one header-add User-Agent "Loon/3.3.5 (iPhone; iOS 18.0; Scale/3.00)"
+
+# 删除浏览器特征头部
+http-request ^https?:\/\/kelee\.one header-del Sec-Ch-Ua
+http-request ^https?:\/\/kelee\.one header-del Sec-Ch-Ua-Mobile
+http-request ^https?:\/\/kelee\.one header-del Sec-Ch-Ua-Platform
+http-request ^https?:\/\/kelee\.one header-del Sec-Fetch-Site
+http-request ^https?:\/\/kelee\.one header-del Sec-Fetch-Mode
+http-request ^https?:\/\/kelee\.one header-del Sec-Fetch-Dest
 
 [MITM]
 hostname = %APPEND% kelee.one
