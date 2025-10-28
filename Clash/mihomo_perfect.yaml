@@ -57,9 +57,17 @@ proxy-groups:
   - {name: 美国节点, <<: *select, filter: "(?i)🇺🇸|美国|洛杉矶|圣何塞|(\b(US|United States)\b)", icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/US.png}
   - {name: 狮城节点, <<: *select, filter: "(?i)🇸🇬|新加坡|狮|(\b(SG|Singapore)\b)", icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/SG_01.png}
   - {name: 日本节点, <<: *select, filter: "(?i)🇯🇵|日本|东京|(\b(JP|Japan)\b)", icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/JP_01.png}
+  - {name: 国内节点, <<: *select, filter: "(CNBJ)", icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/CN.png}
 
 
 rule-providers:
+  cnvps:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://raw.githubusercontent.com/Maybe404/ProxyConfig/refs/heads/main/rule/cnvps.list
+    path: ./sukkaw_ruleset/cnvps.txt
   cdn_domainset:
     type: http
     behavior: domain
@@ -236,6 +244,7 @@ rule-providers:
     url: https://ruleset.skk.moe/Clash/ip/domestic.txt
     path: ./sukkaw_ruleset/domestic_ip.txt
 rules:
+  - RULE-SET,cnvps,国内节点
   - RULE-SET,ai_non_ip,AI
   - RULE-SET,ai,AI
   - RULE-SET,GameDownloadCN,Game
