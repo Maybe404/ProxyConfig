@@ -1,0 +1,34 @@
+#!name=YouTube 混合增强（Surge 适配版）
+#!desc=YouTube 去广告/隐藏按钮/字幕翻译；优先尝试 initplayback 中转，失败回退直连；修正为官方支持的 URL Rewrite 类型
+#!author=merge by you
+#!tag=YouTube, 去广告
+#!date=2025-10-27
+#!requirement=CORE_VERSION>=20
+
+[URL Rewrite]
+# 1) 注入参数：用 302 或 header 均可。这里用 header（不依赖 MITM）
+^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch|log_event))(\?(.*))?$ https://youtubei.googleapis.com/$1?blockUpload={{屏蔽上传按钮}}&blockImmersive={{屏蔽选段按钮}}&blockShorts={{屏蔽Shorts按钮}}&captionLang={{字幕翻译语言}}&lyricLang={{歌词翻译语言}}&$4 header
+
+# 2) initplayback：优先走 Worker（仅匹配带 &ack 的场景）
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback[^ ]*?&ack[^ ]* https://init-stream.maasea.workers.dev/?url=$0 header
+
+# 3) initplayback 回退：其余 initplayback 直连（规避 QUIC 由下方规则处理）
+# 注意：这里用 header 把 URL 规范化为 https（若原本就是 https 实际等价于 no-op，但可统一 Host/SNI）
+^http:\/\/([\w-]+\.googlevideo\.com\/initplayback[^ ]*) https://$1 header
+
+[Map Local]
+# 4) 广告片段占位：空响应
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback[^ ]*?&oad data-type=text data="" status-code=200
+
+[Script]
+# 5) 主脚本：需要 body
+youtube.response = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch))(\?(.*))?$,requires-body=1,max-size=-1,binary-body-mode=1,script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js,argument={"lyricLang":"{{歌词翻译语言}}","captionLang":"{{字幕翻译语言}}","blockUpload":{{屏蔽上传按钮}},"blockImmersive":{{屏蔽选段按钮}},"blockShorts":{{屏蔽Shorts按钮}},"debug":{{启用调试模式}}}
+
+[Rule]
+# 6) 禁用 QUIC/UDP，确保 HTTPS 可被处理
+AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP)),REJECT
+AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
+
+[MITM]
+# 7) 仅在必要域名上启用解密
+hostname = %APPEND% youtubei.googleapis.com, *.googlevideo.com
