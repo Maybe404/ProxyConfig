@@ -243,6 +243,13 @@ rule-providers:
     interval: 43200
     url: https://ruleset.skk.moe/Clash/ip/domestic.txt
     path: ./sukkaw_ruleset/domestic_ip.txt
+  china_ip_ipv6:
+    type: http
+    behavior: classical
+    format: text
+    interval: 43200
+    url: https://ruleset.skk.moe/List/ip/china_ip_ipv6.conf
+    path: ./sukkaw_ruleset/china_ip_ipv6.txt
 rules:
   - RULE-SET,cnvps,国内节点
   - RULE-SET,ai_non_ip,AI
@@ -269,6 +276,6 @@ rules:
   - RULE-SET,stream_ip,Stream
   - RULE-SET,domestic_ip,DIRECT
   - RULE-SET,lan_ip,DIRECT
-  - IP-CIDR6,::/0,REJECT
   - RULE-SET,china_ip,DIRECT
+  - RULE-SET,china_ip_ipv6,DIRECT
   - MATCH,Proxy
