@@ -248,7 +248,7 @@ rule-providers:
     behavior: classical
     format: text
     interval: 43200
-    url: https://ruleset.skk.moe/List/ip/china_ip_ipv6.conf
+    url: https://ruleset.skk.moe/Clash/ip/china_ip_ipv6.txt
     path: ./sukkaw_ruleset/china_ip_ipv6.txt
 rules:
   - RULE-SET,cnvps,国内节点
