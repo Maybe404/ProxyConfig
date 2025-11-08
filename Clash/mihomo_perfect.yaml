@@ -276,6 +276,7 @@ rules:
   - RULE-SET,stream_ip,Stream
   - RULE-SET,domestic_ip,DIRECT
   - RULE-SET,lan_ip,DIRECT
-  - RULE-SET,china_ip,DIRECT
-  - RULE-SET,china_ip_ipv6,DIRECT
+  # - RULE-SET,china_ip,DIRECT
+  # - RULE-SET,china_ip_ipv6,DIRECT
+  - GEOIP,CN,DIRECT
   - MATCH,Proxy
