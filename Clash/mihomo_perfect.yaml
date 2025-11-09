@@ -26,8 +26,9 @@ dns:
   enhanced-mode: fake-ip
   listen: :1053
   fake-ip-range: 198.18.0.1/16
-  fake-ip-filter: ['*', '+.lan', '+.local', '+.direct', '+.msftconnecttest.com', '+.msftncsi.com']
-  nameserver: [223.5.5.5, 119.29.29.29]
+  fake-ip-filter: ['*', '+.lan', '+.local', '+.direct', '+.msftconnecttest.com', 'dns.msftncsi.com', '*.stun.twilio.com', '*.turn.twilio.com','stun.*','*.srv.nintendo.net']
+  nameserver: [quic://223.5.5.5, quic://223.6.6.6, https://1.12.12.12/dns-query, https://120.53.53.53/dns-query]
+  default-nameserver: [223.5.5.5, 119.29.29.29]
 
 # 锚点参数
 pg: &pg {type: select, proxies: [Proxy, 香港节点, 美国节点, 狮城节点, 日本节点, DIRECT]}
